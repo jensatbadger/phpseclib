@@ -1019,6 +1019,10 @@ abstract class Engine implements \JsonSerializable
 
     /**
      * Return the minimum BigInteger between an arbitrary number of BigIntegers.
+     *
+     * @template T of Engine
+     * @param list<T> $nums
+     * @return T
      */
     protected static function minHelper(array $nums): Engine
     {
@@ -1034,6 +1038,10 @@ abstract class Engine implements \JsonSerializable
 
     /**
      * Return the minimum BigInteger between an arbitrary number of BigIntegers.
+     *
+     * @template T of Engine
+     * @param list<T> $nums
+     * @return T
      */
     protected static function maxHelper(array $nums): Engine
     {
