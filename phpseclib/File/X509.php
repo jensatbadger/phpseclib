@@ -1398,7 +1398,7 @@ class X509 implements \ArrayAccess, \Countable, \Iterator, Signable
             return false;
         }
 
-        $cert = static::fetchURL($url);
+        $cert = self::fetchURL($url);
         if (!isset($cert)) {
             return false;
         }
@@ -1509,7 +1509,7 @@ class X509 implements \ArrayAccess, \Countable, \Iterator, Signable
             }
         }
 
-        if (!(static::$urlFetchCallback)($host, $ip, $port, $parts['scheme'])) {
+        if (!(self::$urlFetchCallback)($host, $ip, $port, $parts['scheme'])) {
             return null;
         }
 
@@ -1561,7 +1561,7 @@ class X509 implements \ArrayAccess, \Countable, \Iterator, Signable
 
     public static function setURLFetchCallback(\Closure $func): void
     {
-        static::$urlFetchCallback = $func;
+        self::$urlFetchCallback = $func;
     }
 
     public function enableHideFullDecode(): void

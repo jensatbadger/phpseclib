@@ -1195,7 +1195,7 @@ class SSH2
                     $start = microtime(true);
                     $sec = (int) floor($this->curTimeout);
                     $usec = (int) (1000000 * ($this->curTimeout - $sec));
-                    if (static::stream_select($read, $write, $except, $sec, $usec) === false) {
+                    if (self::stream_select($read, $write, $except, $sec, $usec) === false) {
                         throw new TimeoutException('Connection timed out whilst receiving server identification string');
                     }
                     $elapsed = microtime(true) - $start;
