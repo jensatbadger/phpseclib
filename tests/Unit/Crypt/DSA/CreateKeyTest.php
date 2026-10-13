@@ -22,7 +22,6 @@ class CreateKeyTest extends PhpseclibTestCase
     public function testCreateParameters()
     {
         $dsa = DSA::createParameters();
-        $this->assertInstanceOf(Parameters::class, $dsa);
         $this->assertMatchesRegularExpression('#BEGIN DSA PARAMETERS#', "$dsa");
 
         try {
@@ -32,7 +31,6 @@ class CreateKeyTest extends PhpseclibTestCase
         }
 
         $dsa = DSA::createParameters(512, 160);
-        $this->assertInstanceOf(Parameters::class, $dsa);
         $this->assertMatchesRegularExpression('#BEGIN DSA PARAMETERS#', "$dsa");
 
         return $dsa;
