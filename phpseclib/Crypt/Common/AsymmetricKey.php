@@ -478,6 +478,7 @@ abstract class AsymmetricKey
 
         $k = str_repeat("\0", strlen($h1));
 
+        // @phpstan-ignore property.notFound (Private scalar belongs to the signing subclass, not every asymmetric key.)
         $x = $this->int2octets($this->x);
         $h1 = $this->bits2octets($h1);
 
@@ -489,6 +490,7 @@ abstract class AsymmetricKey
         $this->hmac->setKey($k);
         $v = $this->hmac->hash($v);
 
+        // @phpstan-ignore property.notFound (Subgroup order belongs to the signing subclass.)
         $qlen = $this->q->getLengthInBytes();
 
         while (true) {
@@ -499,6 +501,7 @@ abstract class AsymmetricKey
             }
             $k = $this->bits2int($t);
 
+            // @phpstan-ignore property.notFound (Subgroup order belongs to the signing subclass.)
             if (!$k->equals(self::$zero) && $k->compare($this->q) < 0) {
                 break;
             }
@@ -518,6 +521,7 @@ abstract class AsymmetricKey
     private function int2octets(BigInteger $v): string
     {
         $out = $v->toBytes();
+        // @phpstan-ignore property.notFound (Subgroup order belongs to the signing subclass.)
         $rolen = $this->q->getLengthInBytes();
         if (strlen($out) < $rolen) {
             return str_pad($out, $rolen, "\0", STR_PAD_LEFT);
@@ -537,6 +541,7 @@ abstract class AsymmetricKey
     {
         $v = new BigInteger($in, 256);
         $vlen = strlen($in) << 3;
+        // @phpstan-ignore property.notFound (Subgroup order belongs to the signing subclass.)
         $qlen = $this->q->getLength();
         if ($vlen > $qlen) {
             return $v->bitwise_rightShift($vlen - $qlen);
@@ -552,6 +557,7 @@ abstract class AsymmetricKey
     private function bits2octets(string $in): string
     {
         $z1 = $this->bits2int($in);
+        // @phpstan-ignore property.notFound (Subgroup order belongs to the signing subclass.)
         $z2 = $z1->subtract($this->q);
         return $z2->compare(self::$zero) < 0 ?
             $this->int2octets($z1) :
