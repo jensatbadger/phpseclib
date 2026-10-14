@@ -295,6 +295,7 @@ trait DN
         }
     }
 
+    /** @param-out ($props is Element ? Element : array|Choice) $dn */
     private static function setDNInternal(array|Choice &$dn, array|string|Element $props): void
     {
         $dn['rdnSequence'] = [];
