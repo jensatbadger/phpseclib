@@ -160,10 +160,12 @@ abstract class AsymmetricKey
             throw new NoKeyLoadedException('Unable to read key');
         }
 
+        // @phpstan-ignore variable.undefined ($format is the loop variable of the successful load iteration; the !isset($components) throw above is only passed after that iteration ran.)
         $components['format'] = $format;
         $components['secret'] ??= '';
         $comment = $components['comment'] ?? null;
         $new = static::onLoad($components);
+        // @phpstan-ignore variable.undefined ($format is the loop variable of the successful load iteration; the !isset($components) throw above is only passed after that iteration ran.)
         $new->format = $format;
         $new->comment = $comment;
         return $new instanceof PrivateKey ?
