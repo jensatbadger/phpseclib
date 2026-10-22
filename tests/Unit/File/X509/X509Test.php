@@ -1222,6 +1222,7 @@ qzFkAKWjJj4KjfrbZX4C0Spfxw==
 
         $x509 = X509::load($a)->toArray();
 
+        // @phpstan-ignore method.alreadyNarrowedType (Keep sole multi-certificate parse check.)
         $this->assertIsArray($x509);
     }
 
@@ -1284,6 +1285,7 @@ o2UiZsxgoMYuq02T07DOknc=
         $subject->addDNProp('id-at-organizationName', 'phpseclib demo cert');
         $private->sign($subject);
 
+        // @phpstan-ignore method.alreadyNarrowedType (Keep certificate serialization coverage.)
         $this->assertIsString("$subject");
     }
 
@@ -1315,6 +1317,7 @@ BbNA6tFZAwLoX18R6yEmzHAQ+R2Eliiaz7mgQ+M2d0ec6qQJFoO7aJsX
 
         $x509 = X509::load($a)->toArray();
 
+        // @phpstan-ignore method.alreadyNarrowedType (Keep sole malformed-extension parse check.)
         $this->assertIsArray($x509);
     }
 
@@ -1549,6 +1552,7 @@ XPKVItoiHkqP9zckhd6b4ho=
 
         $x509 = X509::load($cert)->toArray();
 
+        // @phpstan-ignore method.alreadyNarrowedType (Keep sole certificate parse check.)
         $this->assertIsArray($x509);
     }
 
