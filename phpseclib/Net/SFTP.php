@@ -627,9 +627,9 @@ class SFTP extends SSH2
 
         if ($this->version > 2) {
             [$message] = Strings::unpackSSH2('s', $response);
-            $this->sftp_errors[] = isset($filename) ? "$filename ($error): $message" : "$error: $message";
+            $this->sftp_errors[] = "$filename ($error): $message";
         } else {
-            $this->sftp_errors[] = isset($filename) ? "$filename ($error)" : $error;
+            $this->sftp_errors[] = "$filename ($error)";
         }
     }
 
@@ -1104,7 +1104,7 @@ class SFTP extends SSH2
     /**
      * Returns general information about a file.
      *
-     * Returns an array on success and false otherwise.
+     * Returns an array on success; throws an exception on failure.
      */
     public function stat(string $filename): array
     {
@@ -1649,7 +1649,7 @@ class SFTP extends SSH2
         } elseif ($mode & (self::RESUME | self::RESUME_START)) {
             // if OpenFlag::APPEND worked as it should _size() wouldn't need to be called
             $stat = $this->stat($remote_file);
-            $offset = $stat !== false && $stat['size'] ? $stat['size'] : 0;
+            $offset = $stat['size'] ? $stat['size'] : 0;
         } else {
             $offset = 0;
             if ($this->version >= 5) {
@@ -2083,7 +2083,7 @@ class SFTP extends SSH2
 
             if (isset($result)) {
                 // return true if $result is an array or if it's an stdClass object
-                return $result !== false;
+                return true;
             }
         }
 
