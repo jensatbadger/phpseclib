@@ -3134,6 +3134,7 @@ class SSH2
         foreach ($this->auth as $auth) {
             $result = $this->login(...$auth);
         }
+        // @phpstan-ignore variable.undefined (Reachable reconnect paths have recorded authentication attempts, so this loop assigns $result.)
         return $result;
     }
 
