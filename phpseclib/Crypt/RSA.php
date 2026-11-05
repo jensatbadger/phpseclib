@@ -297,7 +297,7 @@ abstract class RSA extends AsymmetricKey
                     while (openssl_error_string() !== false) {
                     }
 
-                    return RSA::load($privatekeystr);
+                    return RSA::load($privatekeystr); // @phpstan-ignore return.type (OpenSSL exported private-key data loads as the concrete RSA private key.)
                 }
             }
         }

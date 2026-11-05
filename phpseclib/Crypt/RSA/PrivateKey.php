@@ -439,7 +439,7 @@ final class PrivateKey extends RSA implements Common\PrivateKey
         }
 
         $key = $type::savePublicKey($this->modulus, $this->publicExponent);
-        return RSA::loadFormat('PKCS8', $key)
+        return RSA::loadFormat('PKCS8', $key) // @phpstan-ignore return.type (This fixed PKCS8 public-key encoding reloads as RSA\PublicKey.)
             ->withHash($this->hash->getHash())
             ->withMGFHash($this->mgfHash->getHash())
             ->withSaltLength($this->sLen)

@@ -62,7 +62,7 @@ final class PrivateKey extends DSA implements Common\PrivateKey
 
         $key = $type::savePublicKey($this->p, $this->q, $this->g, $this->y);
 
-        return DSA::loadFormat('PKCS8', $key)
+        return DSA::loadFormat('PKCS8', $key) // @phpstan-ignore return.type (This fixed PKCS8 public-key encoding reloads as DSA\PublicKey.)
             ->withHash($this->hash->getHash())
             ->withSignatureFormat($this->shortFormat);
     }

@@ -41,7 +41,7 @@ final class PrivateKey extends DH
 
         $key = $type::savePublicKey($this->prime, $this->base, $this->publicKey);
 
-        return DH::loadFormat('PKCS8', $key);
+        return DH::loadFormat('PKCS8', $key); // @phpstan-ignore return.type (This fixed PKCS8 public-key encoding reloads as DH\PublicKey.)
     }
 
     /**
