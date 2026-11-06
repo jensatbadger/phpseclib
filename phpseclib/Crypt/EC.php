@@ -302,7 +302,7 @@ abstract class EC extends AsymmetricKey
         if (!isset($components['dA']) && !isset($components['QA'])) {
             $new = new Parameters();
             $new->curve = $components['curve'];
-            return $new;
+            return $new; // @phpstan-ignore return.type (The built-in parameter child is valid for EC; further user-defined facade subclasses are outside the supported loader contract.)
         }
 
         if (isset($components['dA'])) {
@@ -317,10 +317,10 @@ abstract class EC extends AsymmetricKey
         $new->QA = $components['QA'];
 
         if ($new->curve instanceof TwistedEdwardsCurve) {
-            return $new->withHash($components['curve']::HASH);
+            return $new->withHash($components['curve']::HASH); // @phpstan-ignore return.type (The built-in key child is valid for EC; further user-defined facade subclasses are outside the supported loader contract.)
         }
 
-        return $new;
+        return $new; // @phpstan-ignore return.type (The built-in key child is valid for EC; further user-defined facade subclasses are outside the supported loader contract.)
     }
 
     /**
