@@ -1234,7 +1234,13 @@ abstract class SymmetricKey
                 $this->oldtag = null;
                 throw new BadDecryptionException('Derived authentication tag and supplied authentication tag do not match');
             }
+            if (isset($this->poly1305Key)) {
+                $cipher = clone $this;
+                unset($cipher->poly1305Key);
+                $plaintext = $cipher->decrypt($ciphertext);
+            }
             $this->oldtag = null;
+            // @phpstan-ignore variable.undefined (GCM assigns $plaintext above; Poly1305 assigns after succesful tag validation.)
             return $plaintext;
         }
 
