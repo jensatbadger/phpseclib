@@ -164,9 +164,8 @@ class SCP extends SSH2
     /**
      * Downloads a file from the SCP server.
      *
-     * Returns a string containing the contents of $remote_file if $local_file is left undefined or a boolean false if
-     * the operation was unsuccessful.  If $local_file is defined, returns true or false depending on the success of the
-     * operation
+     * Returns a string containing the contents of $remote_file if $local_file is left undefined, or null if the
+     * contents are written to $local_file. Transfer failures throw an exception.
      *
      * @param string|resource|null $local_file
      * @psalm-suppress PossiblyUnusedMethod
@@ -192,6 +191,7 @@ class SCP extends SSH2
         $fclose_check = false;
         if (is_resource($local_file)) {
             $fp = $local_file;
+            $content = null;
         } elseif (isset($local_file)) {
             try {
                 $fp = Files::open($local_file, 'wb');
@@ -211,7 +211,6 @@ class SCP extends SSH2
                 $data = $this->get_scp_response(false);
             } catch (SSHChannelExitSignalException $e) {
                 if (is_null($local_file)) {
-                    // @phpstan-ignore variable.undefined (is_null($local_file) selects the else branch, which initialized $content)
                     $e->partialOutput = $content;
                 }
                 throw $e;
@@ -233,7 +232,6 @@ class SCP extends SSH2
             }
 
             if (is_null($local_file)) {
-                // @phpstan-ignore variable.undefined (is_null($local_file) selects the else branch, which initialized $content)
                 $content .= $data;
             } else {
                 fputs($fp, $data);
