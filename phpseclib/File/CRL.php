@@ -182,7 +182,7 @@ class CRL implements \ArrayAccess, \Countable, \Iterator, Signable
     /** @psalm-suppress PossiblyUnusedMethod */
     public function hasDNProp(string $propName): bool
     {
-        return $this->hasIssuerNProp($propName);
+        return $this->hasIssuerDNProp($propName);
     }
 
     /** @psalm-suppress PossiblyUnusedMethod */
