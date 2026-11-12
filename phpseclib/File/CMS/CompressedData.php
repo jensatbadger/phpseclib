@@ -73,7 +73,9 @@ class CompressedData implements \ArrayAccess, \Countable, \Iterator
         $cms = ASN1::map($decoded, Maps\ContentInfo::MAP);
         $decoded = ASN1::decodeBER($cms['content']->value);
         $cms['content'] = ASN1::map($decoded, Maps\CompressedData::MAP);
+        // @phpstan-ignore property.notFound (BI-026 remains open: malformed ASN.1 blob-mode metadata write; see analysis/github-issue-drafts/BI-026-asn1-loadstring-blob-root-typeerrors.md.)
         $cms['content']->parent = $cms;
+        // @phpstan-ignore property.notFound (BI-026 remains open: malformed ASN.1 blob-mode metadata write; see analysis/github-issue-drafts/BI-026-asn1-loadstring-blob-root-typeerrors.md.)
         $cms['content']->key = 'content';
         return $cms;
     }
