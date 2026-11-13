@@ -143,10 +143,6 @@ class Agent
      */
     public function requestIdentities(): array
     {
-        if (!$this->fsock) {
-            return [];
-        }
-
         $packet = pack('NC', 1, self::SSH_AGENTC_REQUEST_IDENTITIES);
         if (strlen($packet) != fwrite($this->fsock, $packet)) {
             throw new ConnectionClosedException('Connection closed while requesting identities');
@@ -172,7 +168,7 @@ class Agent
                 case 'ecdsa-sha2-nistp256':
                 case 'ecdsa-sha2-nistp384':
                 case 'ecdsa-sha2-nistp521':
-                    $key = PublicKeyLoader::load($key_type . ' ' . base64_encode($key_blob));
+                    $key = PublicKeyLoader::loadPublicKey($key_type . ' ' . base64_encode($key_blob));
             }
             // resources are passed by reference by default
             if (isset($key)) {
