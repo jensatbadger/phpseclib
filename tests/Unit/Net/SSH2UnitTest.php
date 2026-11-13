@@ -321,7 +321,7 @@ class SSH2UnitTest extends PhpseclibTestCase
         $ssh->expects($this->once())
             ->method('get_channel_packet')
             ->with(-1)
-            ->willReturnCallback(function () use ($ssh): true {
+            ->willReturnCallback(function () use ($ssh): bool {
                 self::setVar($ssh, 'window_size_client_to_server', [1 => 0x7FFFFFFF]);
                 return true;
             });
@@ -346,7 +346,7 @@ class SSH2UnitTest extends PhpseclibTestCase
         $ssh->expects($this->once())
             ->method('get_channel_packet')
             ->with(-1)
-            ->willReturnCallback(function () use ($ssh): true {
+            ->willReturnCallback(function () use ($ssh): bool {
                 self::setVar($ssh, 'window_size_client_to_server', [1 => 0x7FFFFFFF]);
                 return true;
             });
@@ -375,7 +375,7 @@ class SSH2UnitTest extends PhpseclibTestCase
         $ssh->expects($this->once())
             ->method('get_channel_packet')
             ->with(-1)
-            ->willReturnCallback(function () use ($ssh): true {
+            ->willReturnCallback(function () use ($ssh): bool {
                 self::setVar($ssh, 'is_timeout', true);
                 return true;
             });
