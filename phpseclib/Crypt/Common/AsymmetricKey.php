@@ -471,10 +471,11 @@ abstract class AsymmetricKey
      * Not currently used but the method exists in case we do
      * want to use it at some point
      *
+     * @return BigInteger
      * @psalm-suppress PossiblyUnusedMethod
      * @psalm-suppress UndefinedThisPropertyFetch
      */
-    protected function computek(string $h1): string
+    protected function computek(string $h1): BigInteger
     {
         $v = str_repeat("\1", strlen($h1));
 
