@@ -12,6 +12,7 @@ namespace phpseclib4\Tests\Unit\Crypt;
 
 use phpseclib4\Crypt\Hash;
 use phpseclib4\Exception\UnsupportedAlgorithmException;
+use phpseclib4\Exception\UnsupportedValueException;
 use phpseclib4\Tests\PhpseclibTestCase;
 
 class HashTest extends PhpseclibTestCase
@@ -439,6 +440,34 @@ class HashTest extends PhpseclibTestCase
         $this->assertSame($hash->getHash(), 'md5');
         $hash->setHash('sha1');
         $this->assertSame($hash->getHash(), 'sha1');
+    }
+
+    public function testCustomHashAlgorithmsRejectResourceInput(): void
+    {
+        foreach (['keccak256', 'shake128-256'] as $algorithm) {
+            foreach ([false, true] as $keyed) {
+                $stream = fopen('php://memory', 'r+');
+                if (!is_resource($stream)) {
+                    self::fail('Unable to create an in-memory stream');
+                }
+
+                $hash = new Hash($algorithm);
+                if ($keyed) {
+                    $hash->setKey('test key');
+                }
+
+                try {
+                    try {
+                        $hash->hash($stream);
+                        self::fail("$algorithm must reject resource input");
+                    } catch (UnsupportedValueException $e) {
+                        $this->assertSame("$algorithm only works with strings", $e->getMessage());
+                    }
+                } finally {
+                    fclose($stream);
+                }
+            }
+        }
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('lengths')]

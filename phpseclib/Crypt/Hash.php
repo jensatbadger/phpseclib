@@ -1024,7 +1024,7 @@ class Hash
         }
 
         if (is_array($algo)) {
-            if (is_resource($algo)) {
+            if (is_resource($text)) {
                 throw new UnsupportedValueException($this->hashParam . ' only works with strings');
             }
             if (empty($this->key)) {
@@ -1500,6 +1500,7 @@ class Hash
         $s = $saltLength ? str_repeat($salt, (int) ceil($v / $saltLength)) : '';
         $s = substr($s, 0, $v);
 
+        // @phpstan-ignore ternary.alwaysTrue (The normalized password is nonempty, but retain this zero-length fallback to avoid division by zero if normalization changes.)
         $p = $passLength ? str_repeat($password, (int) ceil($v / $passLength)) : '';
         $p = substr($p, 0, $v);
 
