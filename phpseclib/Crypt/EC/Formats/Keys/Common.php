@@ -300,8 +300,8 @@ trait Common
         // we could try to calculate the order thusly:
         // https://crypto.stackexchange.com/a/27914/4520
         // https://en.wikipedia.org/wiki/Schoof%E2%80%93Elkies%E2%80%93Atkin_algorithm
-        if (!$order) {
-            throw new UnsupportedValueException('Specified Curves need the order to be specified');
+        if ($order->compare(new BigInteger(0)) <= 0) {
+            throw new UnsupportedValueException('Specified Curves need a positive order');
         }
         $point = $curve->getBasePoint();
         $x = $point[0]->toBytes();
