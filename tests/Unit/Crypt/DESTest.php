@@ -11,6 +11,7 @@ use phpseclib4\Tests\PhpseclibTestCase;
 
 // the AES tests establish the correctness of the modes of operation. this test is inteded to establish the consistency of
 // key and iv padding between the multiple engines
+// phpcs:ignore PSR1.Classes.ClassDeclaration.MissingNamespace -- Preserve this legacy global PHPUnit test class name.
 class Unit_Crypt_DESTest extends PhpseclibTestCase
 {
     public function testEncryptPadding()

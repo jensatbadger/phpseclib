@@ -5,7 +5,7 @@
 
     <arg name="extensions" value="php"/>
     <arg name="basepath" value=".."/>
-    <arg name="report" value="diff"/>
+    <arg name="report" value="diff,full"/>
     <arg value="s"/>
     <arg value="n"/>
     <arg value="p"/>
