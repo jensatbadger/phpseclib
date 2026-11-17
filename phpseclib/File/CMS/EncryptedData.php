@@ -418,7 +418,6 @@ class EncryptedData implements \ArrayAccess, \Countable, \Iterator
     }
 
     // return the first SearchableKey matching $keyIdentifier or null if none are found
-    /** @psalm-suppress PossiblyUnusedMethod */
     public function findRecipient(string|X509 $keyIdentifier): ?SearchableKey
     {
         $recipients = $this->findRecipients($keyIdentifier);
@@ -701,7 +700,6 @@ class EncryptedData implements \ArrayAccess, \Countable, \Iterator
     }
 
     // from https://www.rfc-editor.org/rfc/rfc3217#section-3.1
-    /** @psalm-suppress PossiblyUnusedMethod */
     public static function wrapDES(#[\SensitiveParameter] string $kek, #[\SensitiveParameter] string $cek): string
     {
         $icv = substr(sha1($cek, true), 0, 8);

@@ -150,7 +150,6 @@ class Identity implements PrivateKey
     /**
      * Sets the hash
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function withHash(string $hash): Identity
     {
@@ -189,7 +188,6 @@ class Identity implements PrivateKey
      *
      * Only PKCS1 padding is supported
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function withPadding(int $padding): Identity
     {
@@ -207,7 +205,6 @@ class Identity implements PrivateKey
      *
      * Valid values are: ASN1, SSH2, Raw
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function withSignatureFormat(string $format): Identity
     {
@@ -226,7 +223,6 @@ class Identity implements PrivateKey
      *
      * Returns a string if it's a named curve, an array if not
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function getCurve(): string|array
     {

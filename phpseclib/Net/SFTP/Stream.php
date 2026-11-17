@@ -100,7 +100,6 @@ class Stream
     /**
      * The Constructor
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function __construct()
     {

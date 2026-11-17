@@ -56,8 +56,8 @@ jobs:
                 run: composer update --with-all-dependencies --no-interaction --no-cache
             -   name: PHP_CodeSniffer
                 run: vendor/bin/phpcs --standard=build/php_codesniffer.xml
-            -   name: Psalm
-                run: vendor/bin/psalm --config=build/psalm.xml --no-cache --long-progress --report-show-info=false
+            -   name: PHPStan
+                run: composer phpstan
         strategy:
             fail-fast: false
     tests:

@@ -316,7 +316,6 @@ abstract class DSA extends AsymmetricKey
     /**
      * Returns the signature format currently being used
      *
-     * @psalm-suppress PossiblyUnusedMethod
      */
     public function getSignatureFormat(): string
     {
