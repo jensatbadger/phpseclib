@@ -319,7 +319,7 @@ abstract class Engine implements \JsonSerializable
 
         $x = $x->compare(static::$zero[static::class]) < 0 ? $x->add($n) : $x;
 
-        // @phpstan-ignore smaller.alwaysFalse (Keep this post-extendedGCD guard rather than assume an overridable engine method cannot change receiver state.)
+        // @phpstan-ignore smaller.alwaysFalse (BI-006: keep this post-extendedGCD guard rather than assume an overridable engine method cannot change receiver state.)
         return $this->compare(static::$zero[static::class]) < 0 ? $this->normalize($n->subtract($x)) : $this->normalize($x);
     }
 
@@ -1000,7 +1000,7 @@ abstract class Engine implements \JsonSerializable
             }
         }
 
-        // @phpstan-ignore variable.undefined (BI-001 remains open: loop-skipping inputs can read an uninitialized comparison and rootInner also returns incorrect roots. See analysis/github-issue-drafts/BI-001-rootInner-incorrect-results.md.)
+        // @phpstan-ignore variable.undefined (BI-001 remains open: loop-skipping inputs can read an uninitialized comparison and rootInner also returns incorrect roots. See BI-001-rootInner-incorrect-results.md.)
         if ($comp == 1) {
             $g = $g->subtract($step);
         }
